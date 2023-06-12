@@ -1,0 +1,32 @@
+# how to download
+    git clone https://github.com/eytan1998/SYS6.git
+    cd SYS6
+    make all
+
+#How to run
+    make sure all compiled by type:
+        make all
+    next load the module:
+        sudo insmod chardev.ko encryption_key=<key>
+    key = to initialize value for the key.(optinal, default = 0)
+
+    if you get this error insmod: ERROR: could not insert module chardev.ko: File exists. better to unload first by:
+        sudo rmmod chardev
+
+    after that the modoul is loaded if you want to get load use:
+        sudo dmesg | grep Chardev
+
+    #main
+        To make i easy i made use side can use:
+            sudo ./main -w <message> -k <key> -r\n");
+
+        <message> = the message to write to device.
+        <key> = to modify the key (int).
+        -r = if you want to write the data.
+
+#Program explain
+    This module is char device that hold encrypt message.
+    the encryption is according to encryption key that can updated on update the data will decrypt by the old key,
+    and encrypt with the new key. the device is located in dev/chardev
+    and the and the byte number is /sys/sysfs_chardev/num_bytes_written
+    the write and read protected with lock
