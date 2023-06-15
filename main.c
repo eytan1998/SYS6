@@ -52,15 +52,14 @@ int main(int argc, char *argv[]) {
 *           key
  * ###################################
 */
-    if(isKey) {
+    if (isKey) {
         // Update the encryption key using IOCTL
-        if (newKey != 0) {
-            if (ioctl(fd, ENCRYPT, &newKey) < 0) {
-                perror("IOCTL failed");
-                close(fd);
-                return ERROR;
-            }
+        if (ioctl(fd, ENCRYPT, &newKey) < 0) {
+            perror("IOCTL failed");
+            close(fd);
+            return ERROR;
         }
+
         printf("Encryption key updated to %d\n", newKey);
     }
 
@@ -91,9 +90,9 @@ int main(int argc, char *argv[]) {
             close(fd);
             return ERROR;
         }
-        if(bytes_read == 0){
+        if (bytes_read == 0) {
             printf("Empty.\n");
-        }else {
+        } else {
             read_buffer[bytes_read] = '\0';
             printf("Data read from the device: %s\n", read_buffer);
         }
